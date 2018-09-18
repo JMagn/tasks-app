@@ -10,6 +10,4 @@ public class TaskDto {
     public Long id;
     private String title;
     private String content;
-
-
 }
