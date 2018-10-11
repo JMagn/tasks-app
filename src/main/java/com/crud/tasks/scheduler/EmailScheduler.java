@@ -22,13 +22,17 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
+    private String createMessage() {
+        long size = taskRepository.count();
+        return "Currently in your database you got: " + size + (size == 1 ? " task" : " tasks");
+    }
+
     @Scheduled(cron = "0 0 10 * * *")
     public void sendInformationEmail() {
-        long size = taskRepository.count();
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
-                "Currently in your database you got: " + size + (size == 1 ? " task" : " tasks"),
+                createMessage(),
                 ""));
     }
 }
