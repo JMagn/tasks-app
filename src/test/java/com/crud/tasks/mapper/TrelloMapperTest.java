@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.*;
 import static org.assertj.core.api.Assertions.*;
@@ -27,20 +28,12 @@ public class TrelloMapperTest {
         TrelloBoardDto trelloBoardDto = new TrelloBoardDto("Board 1", "Test board", trelloListDtoList);
         List<TrelloBoardDto> trelloBoardDtoList = new ArrayList<>();
         trelloBoardDtoList.add(trelloBoardDto);
-
-        TrelloList trelloList = new TrelloList("List 1", "Test list", true);
-        List<TrelloList> trelloLists = new ArrayList<>();
-        trelloLists.add(trelloList);
-        TrelloBoard trelloBoard = new TrelloBoard("Board 1", "Test board", trelloLists);
-        List<TrelloBoard> secondObject = new ArrayList<>();
-        secondObject.add(trelloBoard);
-
         //When
         List<TrelloBoard> result = trelloMapper.mapToBoards(trelloBoardDtoList);
-
         //Then
         assertEquals(1, result.size());
-        assertThat(result).isEqualTo(secondObject);
+        assertThat(result).isEqualTo(Arrays.asList(new TrelloBoard("Board 1", "Test board",
+                Arrays.asList(new TrelloList("List 1", "Test list", true)))));
     }
 
     @Test
@@ -52,20 +45,12 @@ public class TrelloMapperTest {
         TrelloBoard trelloBoard = new TrelloBoard("Board 1", "Test board", trelloLists);
         List<TrelloBoard> trelloBoards = new ArrayList<>();
         trelloBoards.add(trelloBoard);
-
-        TrelloListDto trelloListDto = new TrelloListDto("List 1", "Test list", true);
-        List<TrelloListDto> trelloListDtoList = new ArrayList<>();
-        trelloListDtoList.add(trelloListDto);
-        TrelloBoardDto trelloBoardDto = new TrelloBoardDto("Board 1", "Test board", trelloListDtoList);
-        List<TrelloBoardDto> secondObject = new ArrayList<>();
-        secondObject.add(trelloBoardDto);
-
         //When
         List<TrelloBoardDto> result = trelloMapper.mapToBoardsDto(trelloBoards);
-
         //Then
         assertEquals(1, result.size());
-        assertThat(result).isEqualTo(secondObject);
+        assertThat(result).isEqualTo(Arrays.asList(new TrelloBoardDto("Board 1", "Test board",
+                Arrays.asList(new TrelloListDto("List 1", "Test list", true)))));
     }
 
     @Test
@@ -74,17 +59,11 @@ public class TrelloMapperTest {
         TrelloListDto trelloListDto = new TrelloListDto("List 1", "Test list", true);
         List<TrelloListDto> trelloListDtoList = new ArrayList<>();
         trelloListDtoList.add(trelloListDto);
-
-        TrelloList trelloList = new TrelloList("List 1", "Test list", true);
-        List<TrelloList> secondObject = new ArrayList<>();
-        secondObject.add(trelloList);
-
         //When
         List<TrelloList> result = trelloMapper.mapToList(trelloListDtoList);
-
         //Then
         assertEquals(1, result.size());
-        assertThat(result).isEqualTo(secondObject);
+        assertThat(result).isEqualTo(Arrays.asList(new TrelloList("List 1", "Test list", true)));
     }
 
     @Test
@@ -93,17 +72,11 @@ public class TrelloMapperTest {
         TrelloList trelloList = new TrelloList("List 1", "Test list", true);
         List<TrelloList> trelloLists = new ArrayList<>();
         trelloLists.add(trelloList);
-
-        TrelloListDto trelloListDto = new TrelloListDto("List 1", "Test list", true);
-        List<TrelloListDto> secondObject = new ArrayList<>();
-        secondObject.add(trelloListDto);
-
         //When
         List<TrelloListDto> result = trelloMapper.mapToListDto(trelloLists);
-
         //Then
         assertEquals(1, result.size());
-        assertThat(result).isEqualTo(secondObject);
+        assertThat(result).isEqualTo(Arrays.asList(new TrelloListDto("List 1", "Test list", true)));
     }
 
     @Test
