@@ -36,4 +36,5 @@ dependencies {
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
 	compile('org.springframework.boot:spring-boot-starter-mail:1.5.7.RELEASE')
 	compile ('org.apache.commons:commons-lang3:3.0')
+	testCompile('org.assertj:assertj-core:3.11.1')
 }
