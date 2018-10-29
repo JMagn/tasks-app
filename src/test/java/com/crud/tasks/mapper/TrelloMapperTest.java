@@ -22,9 +22,7 @@ public class TrelloMapperTest {
     @Test
     public void mapToBoards() {
         //Given
-        TrelloBoardDto trelloBoardDto = new TrelloBoardDto("Board 1", "Test board", new ArrayList<>());
-        List<TrelloBoardDto> trelloBoardDtoList = new ArrayList<>();
-        trelloBoardDtoList.add(trelloBoardDto);
+        List<TrelloBoardDto> trelloBoardDtoList = Collections.singletonList(new TrelloBoardDto("Board 1", "Test board", new ArrayList<>()));
         //When
         List<TrelloBoard> result = trelloMapper.mapToBoards(trelloBoardDtoList);
         //Then
@@ -35,9 +33,7 @@ public class TrelloMapperTest {
     @Test
     public void mapToBoardsDto() {
         //Given
-        TrelloBoard trelloBoard = new TrelloBoard("Board 1", "Test board", new ArrayList<>());
-        List<TrelloBoard> trelloBoards = new ArrayList<>();
-        trelloBoards.add(trelloBoard);
+        List<TrelloBoard> trelloBoards = Collections.singletonList(new TrelloBoard("Board 1", "Test board", new ArrayList<>()));
         //When
         List<TrelloBoardDto> result = trelloMapper.mapToBoardsDto(trelloBoards);
         //Then
@@ -48,9 +44,7 @@ public class TrelloMapperTest {
     @Test
     public void mapToList() {
         //Given
-        TrelloListDto trelloListDto = new TrelloListDto("List 1", "Test list", true);
-        List<TrelloListDto> trelloListDtoList = new ArrayList<>();
-        trelloListDtoList.add(trelloListDto);
+        List<TrelloListDto> trelloListDtoList = Collections.singletonList(new TrelloListDto("List 1", "Test list", true));
         //When
         List<TrelloList> result = trelloMapper.mapToList(trelloListDtoList);
         //Then
@@ -61,9 +55,7 @@ public class TrelloMapperTest {
     @Test
     public void mapToListDto() {
         //Given
-        TrelloList trelloList = new TrelloList("List 1", "Test list", true);
-        List<TrelloList> trelloLists = new ArrayList<>();
-        trelloLists.add(trelloList);
+        List<TrelloList> trelloLists = Collections.singletonList(new TrelloList("List 1", "Test list", true));
         //When
         List<TrelloListDto> result = trelloMapper.mapToListDto(trelloLists);
         //Then
