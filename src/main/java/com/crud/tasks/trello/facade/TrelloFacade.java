@@ -6,7 +6,6 @@ import com.crud.tasks.service.TrelloService;
 import com.crud.tasks.trello.validator.TrelloValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component
@@ -26,6 +25,9 @@ public class TrelloFacade {
     }
 
     public CreatedTrelloCardDto createCard(final TrelloCardDto trelloCardDto) {
+        if (trelloCardDto == null) {
+            return null;
+        }
         TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
         trelloValidator.validateCard(trelloCard);
         return trelloService.createTrelloCard(trelloMapper.mapToCardDto(trelloCard));
