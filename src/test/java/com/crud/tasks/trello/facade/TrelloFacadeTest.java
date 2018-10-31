@@ -1,9 +1,6 @@
 package com.crud.tasks.trello.facade;
 
-import com.crud.tasks.domain.TrelloBoard;
-import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.domain.TrelloList;
-import com.crud.tasks.domain.TrelloListDto;
+import com.crud.tasks.domain.*;
 import com.crud.tasks.mapper.TrelloMapper;
 import com.crud.tasks.service.TrelloService;
 import com.crud.tasks.trello.validator.TrelloValidator;
@@ -12,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,5 +97,42 @@ public class TrelloFacadeTest {
                 assertEquals(false, trelloListDto.isClosed());
             });
         });
+    }
+
+    @Test
+    public void shouldCreateCard() throws URISyntaxException {
+        //Given
+        TrelloCardDto trelloCardDto = new TrelloCardDto(
+                "Card_1",
+                "Test_card",
+                "1",
+                "1");
+        TrelloCard trelloCard = new TrelloCard(
+                "Card_1",
+                "Test_card",
+                "1",
+                "1");
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto(
+                "1",
+                "Card_1",
+                "http://test.com"
+        );
+        when(trelloMapper.mapToCard(trelloCardDto)).thenReturn(trelloCard);
+        when(trelloMapper.mapToCardDto(trelloCard)).thenReturn(trelloCardDto);
+        when(trelloService.createTrelloCard(trelloCardDto)).thenReturn(createdTrelloCardDto);
+        //When
+        CreatedTrelloCardDto result = trelloFacade.createCard(trelloCardDto);
+        //Then
+        assertEquals(createdTrelloCardDto, result);
+    }
+
+    @Test
+    public void shouldCreateNullCard() {
+        //Given
+        TrelloCardDto trelloCardDto = null;
+        //When
+        CreatedTrelloCardDto result = trelloFacade.createCard(trelloCardDto);
+        //Then
+        assertNull(result);
     }
 }
