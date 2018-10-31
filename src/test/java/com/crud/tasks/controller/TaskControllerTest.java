@@ -111,7 +111,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void createTask() throws Exception {
+    public void shouldCreateTask() throws Exception {
         //Given
         TaskDto taskDto = new TaskDto(5L, "TaskDto_5", "Test_taskDto");
         Task task = new Task(5L, "Task_5", "Test_task");
