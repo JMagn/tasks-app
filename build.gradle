@@ -40,4 +40,5 @@ dependencies {
 	testCompile ('org.mockito:mockito-core:2.1.0')
 	compile('com.google.code.gson:gson:2.8.2')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 }
