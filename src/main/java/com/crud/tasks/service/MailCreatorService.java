@@ -2,6 +2,8 @@ package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.config.CompanyConfig;
+import com.crud.tasks.domain.Task;
+import com.crud.tasks.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class MailCreatorService {
 
     @Autowired
     private CompanyConfig companyConfig;
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     @Autowired
     @Qualifier("templateEngine")
@@ -45,5 +50,25 @@ public class MailCreatorService {
         context.setVariable("admin_config", adminConfig);
         context.setVariable("application_functionality", functionality);
         return templateEngine.process("mail/created-trello-card-mail", context);
+    }
+
+    public String buildTasksQuantityEmail(String message) {
+        List<Task> tasks = taskRepository.findAll();
+
+        Context context = new Context();
+        context.setVariable("preview_message", "You have a new email: ");
+        context.setVariable("message", message);
+        context.setVariable("tasks_url", "http://localhost:8888/tasks_frontend/");
+        context.setVariable("button", "See your tasks on website");
+        context.setVariable("admin_name", adminConfig.getAdminName());
+        context.setVariable("company_name", companyConfig.getCompanyName());
+        context.setVariable("company_mail", companyConfig.getCompanyMail());
+        context.setVariable("company_phone", companyConfig.getCompanyPhone());
+        context.setVariable("farewell_message", "Best regards, " + companyConfig.getCompanyName() + " team");
+        context.setVariable("show_button", true);
+        context.setVariable("is_friend", false);
+        context.setVariable("admin_config", adminConfig);
+        context.setVariable("task_repository", tasks);
+        return templateEngine.process("mail/tasks-quantity-mail", context);
     }
 }
