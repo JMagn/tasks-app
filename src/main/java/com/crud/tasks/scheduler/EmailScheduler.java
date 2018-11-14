@@ -24,7 +24,7 @@ public class EmailScheduler {
 
     private String createMessage() {
         long size = taskRepository.count();
-        return "Currently in your database you got: " + size + (size == 1 ? " task" : " tasks");
+        return "Currently in your database you have: " + size + (size == 1 ? " task" : " tasks");
     }
 
     @Scheduled(cron = "0 0 10 * * *")
